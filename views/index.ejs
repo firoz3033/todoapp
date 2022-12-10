@@ -1,0 +1,36 @@
+
+    <%- include('head') -%> 
+
+    <div class="container">
+
+        <form id="trashBin" action="/trashBin" method="post">
+            <div class="box" id="heading">
+                <h1><%= listType %></h1>
+                <div class="icon">
+                    <i class="fa-solid fa-trash" onclick="trashBin()" ></i>
+                    <input type="hidden" name="trashBin" value="<%= listType %>">
+                </div>
+            </div>
+        </form>
+        
+        <div class="box">
+
+            <% itemList.forEach(function(item){ %>
+                <form action="/delete" method="post">
+                    <div class="item">
+                        <input type="checkbox" name="checkbox" value="<%= item._id %>" onChange="this.form.submit()">
+                        <p><%= item.item %></p>
+                    </div>
+                    <input type="hidden" name="listType" value="<%= listType %>">
+                 </form>
+            <% }) %>
+            
+            <form class="item" action="/" method="post">
+                
+                <input type="text" name="listItem" placeholder="enter new">
+                <button type="submit" class="bt" value="<%= listType %>" name="listType" >+</button>
+            </form>
+        </div>
+        
+    </div>
+    <%- include('foot') -%> 

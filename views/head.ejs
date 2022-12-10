@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo app</title>
+    <link rel="shortcut icon" href="icon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet"
+    type="text/css" />
+</head>
+<body>
+    
+    <div class="container">
+        <div class="btn-box">
+            <div class="btn-lists">
+                <a href="/list-type"><button class="btn">Custome List</button></a>
+
+                <% navbarItem.forEach(function(item){ %>
+                    <a href="/<%= item.name %>"><button class="btn"><%= item.name %></button></a>
+
+                <% }) %>   
+            </div>
+        </div>
+    </div>
+    
