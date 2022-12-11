@@ -8,7 +8,8 @@ const app = express();
 
 dotenv.config();
 
-const port = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000
+
 
 const db = process.env.DATABASE;
 
@@ -22,9 +23,23 @@ mongoose.set('strictQuery', true);   // mongoose will not connect that's why it 
 // app.use()s
 app.set('view engine', 'ejs');    // this is for ejs to use templating method
 
-app.listen(port,()=>{
-    console.log('server is running on 3000')
-})
+
+
+
+//DEPLOYMENT CONNECTION FOR DATABASE
+
+
+const connectDB = async () => {
+    try {
+      const conn = await mongoose.connect(process.env.MONGO_URI);
+      console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+      console.log(error);
+      process.exit(1);
+    }
+  }
+
+
 
 mongoose.connect(db,{useNewUrlParser: true});  // connecting mongoose
 
@@ -207,4 +222,12 @@ app.post("/trashBin",(req,res)=>{
 
 app.post('/type',(req,res)=>{                                       // posting custom form data 
     res.redirect('/'+ req.body.customeListType)
+})
+
+
+
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log("listening for requests");
+    })
 })
