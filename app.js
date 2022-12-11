@@ -8,6 +8,8 @@ const app = express();
 
 dotenv.config();
 
+const port = process.env.PORT || 3000
+
 const db = process.env.DATABASE;
 
 app.use(express.static('public'));  // telling node to use public as a static folder
@@ -20,7 +22,7 @@ mongoose.set('strictQuery', true);   // mongoose will not connect that's why it 
 // app.use()s
 app.set('view engine', 'ejs');    // this is for ejs to use templating method
 
-app.listen(3000,()=>{
+app.listen(port,()=>{
     console.log('server is running on 3000')
 })
 
