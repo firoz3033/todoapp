@@ -1,9 +1,14 @@
 const express = require('express');
 const bodyparser = require('body-parser');  // to take the form data without this we will be unable to find
 const mongoose = require('mongoose');   // this is a database for mongoose
-
+const dotenv = require('dotenv');
 
 const app = express();
+
+
+dotenv.config();
+
+const db = process.env.DATABASE;
 
 app.use(express.static('public'));  // telling node to use public as a static folder
 app.use(bodyparser.urlencoded({extended:true}))  // imp for form 
@@ -19,7 +24,7 @@ app.listen(3000,()=>{
     console.log('server is running on 3000')
 })
 
-mongoose.connect("mongodb+srv://alpha:firozalpha3033@cluster0.zqpoiqm.mongodb.net/todoappDB",{useNewUrlParser: true});  // connecting mongoose
+mongoose.connect(db,{useNewUrlParser: true});  // connecting mongoose
 
 const itemSchema = ({                                       // this is the schema for mongoose database
     item: String,
@@ -29,6 +34,7 @@ const listSchema = ({
     name:String,
     item:[itemSchema]
 })
+
 
 const Item = mongoose.model('item',itemSchema);         // this is a model and item is collection
 const List = mongoose.model('list',listSchema);
