@@ -8,7 +8,7 @@ const app = express();
 
 dotenv.config();
 
-const PORT = process.env.PORT || 3000
+var HTTP_PORT = process.env.PORT || 8080;
 
 
 const db = process.env.DATABASE;
@@ -227,7 +227,7 @@ app.post('/type',(req,res)=>{                                       // posting c
 
 
 connectDB().then(() => {
-    app.listen(PORT, () => {
+    app.listen(HTTP_PORT, () => {
         console.log("listening for requests");
     })
 })
